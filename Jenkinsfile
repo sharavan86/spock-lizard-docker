@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Check for POM') {
-      steps {
-        fileExists 'pom.xml'
+      parallel {
+        stage('Check for POM') {
+          steps {
+            fileExists 'pom.xml'
+          }
+        }
+
+        stage('tst') {
+          steps {
+            pwd(tmp: true)
+          }
+        }
+
       }
     }
 
